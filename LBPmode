@@ -1,0 +1,40 @@
+LBP 
+
+1. Divide the examined window into cells (e.g. 16x16 pixels for each cell).
+2. For each pixel in a cell, compare the pixel to each of its 8 neighbors (on its left-top, left-middle, left-bottom, right-top, etc.). Follow the pixels along a circle, i.e. clockwise or counter-clockwise.
+3. Where the center pixel's value is greater than the neighbor's value, write "0". Otherwise, write "1". This gives an 8-digit binary number (which is usually converted to decimal for convenience).
+4. Compute the histogram, over the cell, of the frequency of each "number" occurring (i.e., each combination of which pixels are smaller and which are greater than the center). This histogram can be seen as a 256-dimensional feature vector.
+5. Optionally normalize the histogram.
+6. Concatenate (normalized) histograms of all cells. This gives a feature vector for the entire window.
+
+
+## LBP function
+
+local_binary_pattern
+skimage.feature.local_binary_pattern(image, P, R, method=’default’)[source]
+Gray scale and rotation invariant LBP (Local Binary Patterns).
+
+LBP is an invariant descriptor that can be used for texture classification.
+
+Parameters:	
+image : (N, M) array
+Graylevel image.
+P : int
+Number of circularly symmetric neighbour set points (quantization of the angular space).
+R : float
+Radius of circle (spatial resolution of the operator).
+method : {‘default’, ‘ror’, ‘uniform’, ‘var’}
+Method to determine the pattern.
+‘default’: original local binary pattern which is gray scale but not
+rotation invariant.
+‘ror’: extension of default implementation which is gray scale and
+rotation invariant.
+‘uniform’: improved rotation invariance with uniform patterns and
+finer quantization of the angular space which is gray scale and rotation invariant.
+‘nri_uniform’: non rotation-invariant uniform patterns variant
+which is only gray scale invariant [R195].
+‘var’: rotation invariant variance measures of the contrast of local
+image texture which is rotation but not gray scale invariant.
+Returns:	
+output : (N, M) array
+LBP image.
